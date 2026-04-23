@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yahya Omar</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #60a5fa;
+        }
+        
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Glass Effect */
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Animated Background */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+        }
+        
+        /* Card Hover Effect */
+        .hover-card {
+            transition: all 0.3s ease;
+        }
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+        
+        /* Button Glow */
+        .btn-glow {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        .btn-glow:hover::before {
+            left: 100%;
+        }
+        
+        /* Fade In Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Skill Bar Animation */
+        @keyframes fillBar {
+            from { width: 0; }
+            to { width: var(--target-width); }
+        }
+        .skill-bar-fill {
+            animation: fillBar 1.5s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200 antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass top-0 transition-all duration-300" id="navbar">
+        <div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold gradient-text mono">&lt;YAYA/&gt;</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="hover:text-blue-400 transition-colors px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="hover:text-blue-400 transition-colors px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#skills" class="hover:text-blue-400 transition-colors px-3 py-2 rounded-md text-sm font-medium">Skills</a>
+                        <a href="#projects" class="hover:text-blue-400 transition-colors px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                        <a href="#services" class="hover:text-blue-400 transition-colors px-3 py-2 rounded-md text-sm font-medium">Services</a>
+                        <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all btn-glow">Contact Me</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-slate-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block hover:text-blue-400 px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#about" class="block hover:text-blue-400 px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#skills" class="block hover:text-blue-400 px-3 py-2 rounded-md text-base font-medium">Skills</a>
+                <a href="#projects" class="block hover:text-blue-400 px-3 py-2 rounded-md text-base font-medium">Projects</a>
+                <a href="#services" class="block hover:text-blue-400 px-3 py-2 rounded-md text-base font-medium">Services</a>
+                <a href="#contact" class="block text-blue-400 px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+ 
+    <!-- Hero Section -->
+<section id="home" class="relative min-h-screen flex items-center justify-center bg-grid pt-16 overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+            <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-1000"></div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+                <span class="block text-slate-100">Yahya Omar</span>
+                <span class="block gradient-text mt-2">Data Analyst</span>
+            </h1>
+            <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-400 leading-relaxed font-light text-justify" style="text-justify: inter-word; text-align-last: center;">
+                I'm a Data Analyst, my goal is helping businesses get the most value from their data. I turn complicated datasets into clear, useful insights that helps people make smart decisions and grow their businesses. I'm an expert in Excel, MySQL, Python libs (NumPy—Pandas—Matplotlib), and Power BI.
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#projects" class="inline-flex items-center px-8 py-4 border border-transparent text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition-all btn-glow shadow-lg shadow-blue-500/30">
+                    View My Work
+                    <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                </a>
+                <a href="#contact" class="inline-flex items-center px-8 py-4 border border-slate-600 text-base font-medium rounded-lg text-slate-300 hover:text-white hover:border-slate-400 transition-all glass">
+                    Contact Me
+                    <i data-lucide="mail" class="ml-2 w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevron-down" class="w-8 h-8 text-slate-500/60"></i>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-slate-900 relative">
+        <div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Left Column -->
+                <div class="fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        <span class="gradient-text">About Me</span>
+                    </h2>
+                    <div class="space-y-6 text-lg text-slate-300 leading-relaxed">
+                        <p>
+                            BIS Student at <span class="text-blue-400 font-semibold">Helwan University</span> and Data Analyst trainee at <span class="text-purple-400 font-semibold">DEPI by MCIT</span>. I specialize in bridging the gap between business information systems and technical data analytics to drive informed decision-making.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Right Column - Visual -->
+                <div class="relative fade-in delay-200">
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl transform rotate-3 opacity-20"></div>
+                    <div class="relative glass rounded-2xl p-8 border border-slate-700">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-slate-800 rounded-lg p-4 text-center hover-card">
+                                <i data-lucide="trending-up" class="w-8 h-8 mx-auto text-blue-400 mb-2"></i>
+                                <div class="text-sm font-semibold text-slate-200">Growth Strategy</div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4 text-center hover-card">
+                                <i data-lucide="database" class="w-8 h-8 mx-auto text-purple-400 mb-2"></i>
+                                <div class="text-sm font-semibold text-slate-200">Data Cleaning</div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4 text-center hover-card">
+                                <i data-lucide="bar-chart-2" class="w-8 h-8 mx-auto text-green-400 mb-2"></i>
+                                <div class="text-sm font-semibold text-slate-200">Visualization</div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4 text-center hover-card">
+                                <i data-lucide="code" class="w-8 h-8 mx-auto text-orange-400 mb-2"></i>
+                                <div class="text-sm font-semibold text-slate-200">Coding</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Code Snippet Decoration -->
+                        <div class="mt-6 bg-slate-950 rounded-lg p-4 font-mono text-xs text-slate-400 overflow-hidden">
+                            <div class="flex gap-2 mb-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <div class="text-blue-400">def</div> <div class="text-yellow-400">transform_data</div>(business_problem):<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;insights = <div class="text-purple-400">analyze</div>(data)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<div class="text-blue-400">return</div> <div class="text-green-400">growth_strategy</div>(insights)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Skills -->
+    
+    <section id="skills" class="py-24 bg-slate-950 relative bg-grid">
+        <div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="gradient-text">Technical Skills</span>
+                </h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Tools and technologies I use to transform data into useful Insights</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Data Analysis -->
+                <div class="glass rounded-2xl p-8 hover-card fade-in">
+                    <div class="w-14 h-14 bg-blue-500/20 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="bar-chart-3" class="w-7 h-7 text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-100 mb-4">Data Analysis</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-slate-300">SQL (MySQL)</span>
+                                <span class="text-sm text-blue-400"></span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full skill-bar-fill" style="--target-width: 100%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-slate-300">Python (Pandas/NumPy)</span>
+                                <span class="text-sm text-blue-400"></span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full skill-bar-fill" style="--target-width: 100%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-slate-300">Advanced Excel (Power Pivot/DAX)</span>
+                                <span class="text-sm text-blue-400"></span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full skill-bar-fill" style="--target-width: 100%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-slate-300">Power BI</span>
+                                <span class="text-sm text-blue-400"></span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full skill-bar-fill" style="--target-width: 100%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-slate-300">Tableau</span>
+                                <span class="text-sm text-blue-400"></span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full skill-bar-fill" style="--target-width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design -->
+                <div class="glass rounded-2xl p-8 hover-card fade-in delay-100">
+                    <div class="w-14 h-14 bg-purple-500/20 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="palette" class="w-7 h-7 text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-100 mb-4">Design</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-slate-300">Database Design (ERDs)</span>
+                                <span class="text-sm text-purple-400"></span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-purple-500 h-2 rounded-full skill-bar-fill" style="--target-width: 100%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-slate-300">Figma</span>
+                                <span class="text-sm text-purple-400"></span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-purple-500 h-2 rounded-full skill-bar-fill" style="--target-width: 100%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-slate-300">Adobe Photoshop</span>
+                                <span class="text-sm text-purple-400"></span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-purple-500 h-2 rounded-full skill-bar-fill" style="--target-width: 100%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-slate-300">Illustrator</span>
+                                <span class="text-sm text-purple-400"></span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-purple-500 h-2 rounded-full skill-bar-fill" style="--target-width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 bg-slate-900">
+        <div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-10">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="gradient-text">My Projects</span>
+                </h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Real-world impact through data-driven solutions</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1: Hotel Guest Insights Dashboard -->
+                <div class="glass rounded-2xl overflow-hidden hover-card fade-in group">
+                    <div class="relative h-64 bg-slate-800 overflow-hidden">
+                        <img src="assets/Project 1.png" alt="Hotel Guest Insights Dashboard" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                            NPS Analytics
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-slate-100 mb-3">Hotel Guest Insights Dashboard</h3>
+                        <p class="text-slate-400 mb-6">Analyze visitor satisfaction using Power Query and NPS scoring.</p>
+
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-xs font-medium">Power Query</span>
+                            <span class="px-3 py-1 bg-pink-500/10 text-pink-400 rounded-full text-xs font-medium">Data Modeling</span>
+                            <span class="px-3 py-1 bg-purple-500/10 text-purple-400 rounded-full text-xs font-medium">NPS Scoring</span>
+                            <span class="px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-full text-xs font-medium">Data Visualization</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Sales Data Analysis Dashboard -->
+                <div class="glass rounded-2xl overflow-hidden hover-card fade-in group">
+                    <div class="relative h-64 bg-slate-800 overflow-hidden">
+                        <img src="assets/Project 3.png" alt="Hotel Guest Insights Dashboard" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                            Sales Analytics
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-slate-100 mb-3">Sales Data Analysis Dashboard</h3>
+                        <p class="text-slate-400 mb-6">Analyzed records to visualize revenue trends and profit drivers.</p>
+
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-xs font-medium">Power Query</span>
+                            <span class="px-3 py-1 bg-purple-500/10 text-purple-400 rounded-full text-xs font-medium">Data Modeling</span>
+                            <span class="px-3 py-1 bg-pink-500/10 text-pink-400 rounded-full text-xs font-medium">DAX</span>
+                            <span class="px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-full text-xs font-medium">Data Visualization</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Global Sales Analysis Dashboard-->
+                <div class="glass rounded-2xl overflow-hidden hover-card fade-in delay-100 group">
+                    <div class="relative h-64 bg-slate-800 overflow-hidden">
+                        <img src="assets/Project 2.png" alt="Global Sales Analysis" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                            Trend Analysis
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-slate-100 mb-3">Global Sales Analysis Dashboard</h3>
+                        <p class="text-slate-400 mb-6">Focus on Trend Analysis and business target tracking.</p>
+
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-green-500/10 text-green-400 rounded-full text-xs font-medium">Power Query</span>
+                            <span class="px-3 py-1 bg-orange-500/10 text-orange-400 rounded-full text-xs font-medium">Data Modeling</span>
+                            <span class="px-3 py-1 bg-purple-500/10 text-purple-400 rounded-full text-xs font-medium">Trend Analysis</span>
+                            <span class="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-xs font-medium">Data Visualization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-slate-950 relative bg-grid">
+        <div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="gradient-text">Services Offered</span>
+                </h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Turning Complex Data Into Strategic Insights</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Service 1 -->
+                <div class="glass rounded-2xl p-6 hover-card fade-in group cursor-pointer">
+                    <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-500/30 transition-colors">
+                        <i data-lucide="layout-dashboard" class="w-6 h-6 text-blue-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-100 mb-2">Interactive Dashboards</h3>
+                    <p class="text-slate-400 text-sm">Visual analytics using Power BI and Tableau transform complicated data and KPIs into useful insights through drill-down dashboards that provide 360° business visibility.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass rounded-2xl p-6 hover-card fade-in delay-75 group cursor-pointer">
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-500/30 transition-colors">
+                        <i data-lucide="database" class="w-6 h-6 text-purple-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-100 mb-2">Data Cleaning & Quality</h3>
+                    <p class="text-slate-400 text-sm">Automating the process of fixing errors and inconsistencies in your datasets using Power Query and Python, so you can trust every number in your reports.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass rounded-2xl p-6 hover-card fade-in delay-100 group cursor-pointer">
+                    <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-500/30 transition-colors">
+                        <i data-lucide="server" class="w-6 h-6 text-green-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-100 mb-2">Database Architecture</h3>
+                    <p class="text-slate-400 text-sm">Building organized and efficient data structures that keep your business information safe, fast to access, and ready to grow as your company expands.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass rounded-2xl p-6 hover-card fade-in delay-150 group cursor-pointer">
+                    <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-500/30 transition-colors">
+                        <i data-lucide="activity" class="w-6 h-6 text-orange-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-100 mb-2">Performance Reporting</h3>
+                    <p class="text-slate-400 text-sm">Setting up automatic reports that track your company's progress and goals, so you always know exactly how your business is performing at any moment.</p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="glass rounded-2xl p-6 hover-card fade-in delay-200 group cursor-pointer">
+                    <div class="w-12 h-12 bg-pink-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-pink-500/30 transition-colors">
+                        <i data-lucide="search" class="w-6 h-6 text-pink-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-100 mb-2">Pattern Analysis</h3>
+                    <p class="text-slate-400 text-sm">Uncovering trends and relationships within your data using advanced Python libs to provide a deeper understanding of your business performance.</p>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="glass rounded-2xl p-6 hover-card fade-in delay-300 group cursor-pointer">
+                    <div class="w-12 h-12 bg-indigo-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-indigo-500/30 transition-colors">
+                        <i data-lucide="pen-tool" class="w-6 h-6 text-indigo-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-100 mb-2">Visual Experience Design</h3>
+                    <p class="text-slate-400 text-sm">Combining data analysis with modern Ui & UX design to create obvious dashboards that tell a clear story without the clutter."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Footer -->
+    <section id="contact" class="py-24 bg-slate-900 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-30"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    Let's Build Something <span class="gradient-text">Together</span>
+                </h2>
+                <p class="text-xl text-slate-400 mb-12 max-w-2xl mx-auto">
+                    Ready to turn your data into competitive advantage? I'm currently seeking freelance opportunities in e-commerce analytics and business intelligence.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12 flex-wrap">
+                    <a href="mailto:yahyaomar2210@gmail.com" class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all btn-glow shadow-lg shadow-blue-500/25 w-full sm:w-auto justify-center">
+                        <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
+                        Email Me
+                    </a>
+                    <a href="tel:01556874134" class="inline-flex items-center px-8 py-4 glass hover:bg-slate-800 text-slate-200 rounded-lg font-semibold transition-all border border-slate-600 hover:border-slate-400 w-full sm:w-auto justify-center">
+                        <i data-lucide="phone" class="w-5 h-5 mr-2"></i>
+                        01556874134
+                    </a>
+                    <a href="https://www.linkedin.com/in/yahya-omar2210/" target="_blank" class="inline-flex items-center px-8 py-4 glass hover:bg-slate-800 text-slate-200 rounded-lg font-semibold transition-all border border-slate-600 hover:border-slate-400 w-full sm:w-auto justify-center">
+                        <i data-lucide="linkedin" class="w-5 h-5 mr-2"></i>
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/yahyaomar2210" target="_blank" class="inline-flex items-center px-8 py-4 glass hover:bg-slate-800 text-slate-200 rounded-lg font-semibold transition-all border border-slate-600 hover:border-slate-400 w-full sm:w-auto justify-center">
+                        <i data-lucide="github" class="w-5 h-5 mr-2"></i>
+                        GitHub
+                    </a>
+                </div>
+
+                <div class="glass rounded-2xl p-8 max-w-2xl mx-auto border border-slate-700">
+                    <p class="text-slate-300 italic text-lg font-light">
+                        "Data is only valuable when it drives action. Let's build something impactful together."
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="mt-16 pt-8 border-t border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-slate-500 text-sm">
+                    &copy; 2026 Yahya Omar. All rights reserved.
+                </div>
+                <div class="flex gap-6">
+                    <a href="https://www.linkedin.com/in/yahya-omar2210/" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-blue-400 transition-colors">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://github.com/yahyaomar2210" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-blue-400 transition-colors">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                    <a href="mailto:yahyaomar2210@gmail.com" class="text-slate-500 hover:text-blue-400 transition-colors">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                    </a>
+                    <a href="tel:01556874134" class="text-slate-500 hover:text-blue-400 transition-colors">
+                        <i data-lucide="phone" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('shadow-lg', 'bg-slate-900/95');
+            } else {
+                navbar.classList.remove('shadow-lg', 'bg-slate-900/95');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate skill bars if this is a skills section
+                    const skillBars = entry.target.querySelectorAll('.skill-bar-fill');
+                    skillBars.forEach(bar => {
+                        bar.style.width = bar.style.getPropertyValue('--target-width');
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('#home');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
